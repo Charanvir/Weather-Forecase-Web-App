@@ -1,6 +1,6 @@
 import streamlit as st
 import plotly.express as px
-from data_function import get_data
+from backend import get_data
 
 st.title("Weather Forecast for the Next Days")
 place = st.text_input("Place: ")
@@ -14,7 +14,7 @@ if place:
     else:
         st.subheader(f"{option} for the next day in {place}")
 
-    d, t = get_data(days)
+    d, t = get_data(place, days, option)
 
-    figure = px.line(x=d, y=t, labels={"x": "Date", "y":"Temperature (C)"})
+    figure = px.line(x=d, y=t, labels={"x": "Date", "y": "Temperature (C)"})
     st.plotly_chart(figure)
