@@ -12,14 +12,14 @@ if place:
     if days > 1:
         st.subheader(f"{option} for the next {days} days in {place}")
     else:
-        st.subheader(f"{option} for the next day in {place}")
+        st.subheader(f"{option} for tomorrow in {place}")
 
     try:
         data = get_data(place, days)
 
         if option == "Temperature":
             filtered_data = [temp_dict["main"]["temp"] for temp_dict in data]
-            temperature = [temp-271.15 for temp in filtered_data]
+            temperature = [temp-273.15 for temp in filtered_data]
             dates = [date_dict["dt_txt"] for date_dict in data]
             figure = px.line(x=dates, y=temperature, labels={"x": "Date", "y": "Temperature (C)"})
             st.plotly_chart(figure)
